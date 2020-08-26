@@ -190,3 +190,67 @@ specific case, for example: creating a task. It can be used using a class or an 
 The recommended approach is to use classes. The reason is that interfaces are a part of TS and therefore
 are not preserved post-compilation. Classes are preserved after compilation.
 
+## Pipes
+
+Pipes operates on the arguments to be processed by the route handler,
+just before the handler is called.
+
+They can perform data transformation or data validation. They also can throw
+exceptions which will be parsed to return an error.
+
+### ValidationPipe
+
+Validates the compatibility of an entire object against a class 
+(type, attributes, etc). If anything goes wrong, an exception will be thrown.
+
+### ParseIntPipe
+
+Validates that an argument is a number. If so, it will be automatically parsed
+and used as a type Number.
+
+### Custom Pipes
+
+Pipes are classes annoted with `@Injectable()`.
+They must implement the PipeTransform generic interface, which provides a
+`transform()` method. This method is called by NestJS to process the arguments.
+
+The `transform()` method accepts two parameters: 
+- `value` of the processed argument.
+- `metadata` *(optional)* object about the argument.
+
+Whatever is returned from this method will be returned to the route handler.
+Exceptions will be sent back to the client.
+
+### Use them
+`yarn add class-validator class-transformer`
+#### Handler-level pipes: 
+
+```TYPESCRIPT
+@Post()
+@UsePipes(myPipe)
+createTask(@Body('description') description: string) {
+	// code
+	}
+```
+
+#### Parameters-level pipes:
+
+```TYPESCRIPT
+@Post()
+createTask(@Body('description', myPipe) description: string) {
+        // code
+        }
+```
+
+#### Global pipes:
+
+*in main.ts*
+
+```TYPESCRIPT
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(myPipe);
+  await app.listen(3000);
+}
+bootstrap();
+```
