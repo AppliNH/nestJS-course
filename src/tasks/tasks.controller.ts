@@ -22,4 +22,9 @@ export class TasksController {
         return this.tasksService.createTask(createTaskDTO);
     }
 
+    @Delete('/:id')
+    deleteTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {
+        return this.tasksService.deleteTaskById(id);
+    }
+
 }
