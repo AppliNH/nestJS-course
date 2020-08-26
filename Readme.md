@@ -273,7 +273,7 @@ ORM is a technique that allows to query and manipulate data from a database, usi
 - Make it easy to forget what's happening behind the scenes.
 
 ## TypeORM
-
+`yarn add @nestjs/typeorm typeorm pg`
 It's an ORM lib that can run in NodeJS and be used with TypeScript (or JS).
 
 **Example:**
@@ -283,3 +283,6 @@ It's an ORM lib that can run in NodeJS and be used with TypeScript (or JS).
 ```TYPESCRIPT
 const tasks = await Task.find({ status: 'DONE', user: 'Ashley' });
 ```
+
+**=> Create the typeORMconfig file (src/config/typeorm.config.ts) and include it in the App Module.**
+
