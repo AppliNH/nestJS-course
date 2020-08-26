@@ -13,7 +13,7 @@ export class TasksService {
 
     getTaskById(id: string): Task {
 
-        const found =  this.tasks.find((task) => task.id == id);
+        const found = this.tasks.find((task) => task.id == id);
         if (!found) {
             throw new NotFoundException(`Task with ID ${id} not found`);
         } else {
@@ -22,7 +22,7 @@ export class TasksService {
     }
 
     getTasksWithFilter(filter: GetTaskFilterDto): Task[] {
-        const {status, search} = filter;
+        const { status, search } = filter;
 
         let tasks = this.getAllTasks();
 
@@ -49,26 +49,26 @@ export class TasksService {
         return task;
     }
 
-    updateTaskStatus(id: string, status: TaskStatus): Task{
-        if (this.getTaskById(id) != undefined) {
-            const newList: Task[] = this.tasks.map((task: Task) => {
-                if (task.id == id) {
-                    task.status = status;
-                }
-                return task
-            })
-            this.tasks = newList
-            return this.getTaskById(id)
-        }
-        
+    updateTaskStatus(id: string, status: TaskStatus): Task {
+        const found = this.getTaskById(id) // Will throw error message if not found
+
+        const newList: Task[] = this.tasks.map((task: Task) => {
+            if (task.id == id) {
+                task.status = status;
+            }
+            return task
+        })
+        this.tasks = newList
+        return this.getTaskById(id) // UpdatedTask
+
+
     }
 
 
     deleteTaskById(id: string): Task {
-        if (this.getTaskById(id) != undefined) {
-            this.tasks = this.tasks.filter((task) => task.id !== id)
-            return this.getTaskById(id)
-        }
+        const found = this.getTaskById(id) // Will throw error message if not found
+        this.tasks = this.tasks.filter((task) => task.id !== id)
+        return found
     }
 
 }
