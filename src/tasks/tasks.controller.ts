@@ -17,4 +17,9 @@ export class TasksController {
         return this.tasksService.getTaskById(id);
     }
 
+    @Post()
+    createTask(@Body() createTaskDTO: CreateTaskDTO): Promise<Task> {
+        return this.tasksService.createTask(createTaskDTO);
+    }
+
 }

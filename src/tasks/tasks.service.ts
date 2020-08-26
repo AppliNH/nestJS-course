@@ -22,4 +22,9 @@ export class TasksService {
         return found;
     }
 
+    async createTask(createTaskDTO: CreateTaskDTO): Promise<Task> {
+       return this.taskRepository.createTask(createTaskDTO);
+
+    }
+
 }
