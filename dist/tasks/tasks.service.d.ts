@@ -7,6 +7,6 @@ export declare class TasksService {
     getTaskById(id: string): Task;
     getTasksWithFilter(filter: GetTaskFilterDto): Task[];
     createTask(createTaskDTO: CreateTaskDTO): Task;
-    updateTaskStatus(id: string, status: TaskStatus): any;
-    deleteTaskById(id: string): boolean;
+    updateTaskStatus(id: string, status: TaskStatus): Task;
+    deleteTaskById(id: string): Task;
 }

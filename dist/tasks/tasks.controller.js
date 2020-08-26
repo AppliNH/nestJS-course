@@ -38,18 +38,7 @@ let TasksController = class TasksController {
         return this.tasksService.updateTaskStatus(id, status);
     }
     deleteTaskById(id) {
-        if (this.tasksService.deleteTaskById(id)) {
-            return {
-                "state": "Sucess",
-                "id": id
-            };
-        }
-        else {
-            return {
-                "state": "failure",
-                "id": id
-            };
-        }
+        return this.tasksService.deleteTaskById(id);
     }
 };
 __decorate([
@@ -79,7 +68,7 @@ __decorate([
     __param(0, common_1.Param('id')), __param(1, common_1.Body('status')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Object)
 ], TasksController.prototype, "updateTaskStatus", null);
 __decorate([
     common_1.Delete('/:id'),

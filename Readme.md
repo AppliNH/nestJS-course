@@ -222,7 +222,7 @@ Whatever is returned from this method will be returned to the route handler.
 Exceptions will be sent back to the client.
 
 ### Use them
-`yarn add class-validator class-transformer`
+
 #### Handler-level pipes: 
 
 ```TYPESCRIPT
@@ -254,3 +254,7 @@ async function bootstrap() {
 }
 bootstrap();
 ```
+**You can also bind pipes with class validator/transformer !**
+[Doc here](https://github.com/typestack/class-validator#validation-decorators)
+`yarn add class-validator class-transformer`
+

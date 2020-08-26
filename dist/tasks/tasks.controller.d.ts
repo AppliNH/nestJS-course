@@ -8,6 +8,6 @@ export declare class TasksController {
     getTasks(filter: GetTaskFilterDto): Task[];
     getTaskById(id: string): Task;
     createTask(createTaskDTO: CreateTaskDTO): Task;
-    updateTaskStatus(id: string, status: TaskStatus): any;
-    deleteTaskById(id: string): object;
+    updateTaskStatus(id: string, status: TaskStatus): Task;
+    deleteTaskById(id: string): Task;
 }

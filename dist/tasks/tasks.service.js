@@ -18,7 +18,13 @@ let TasksService = class TasksService {
         return this.tasks;
     }
     getTaskById(id) {
-        return this.tasks.find((task) => task.id == id);
+        const found = this.tasks.find((task) => task.id == id);
+        if (!found) {
+            throw new common_1.NotFoundException(`Task with ID ${id} not found`);
+        }
+        else {
+            return found;
+        }
     }
     getTasksWithFilter(filter) {
         const { status, search } = filter;
@@ -54,19 +60,16 @@ let TasksService = class TasksService {
             return this.getTaskById(id);
         }
         else {
-            return {
-                "error": "not found",
-                "id": id
-            };
+            throw new common_1.NotFoundException(`Task with ID ${id} not found`);
         }
     }
     deleteTaskById(id) {
         if (this.getTaskById(id) != undefined) {
             this.tasks = this.tasks.filter((task) => task.id !== id);
-            return true;
+            return this.getTaskById(id);
         }
         else {
-            return false;
+            throw new common_1.NotFoundException(`Task with ID ${id} not found`);
         }
     }
 };
