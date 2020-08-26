@@ -59,8 +59,6 @@ export class TasksService {
             })
             this.tasks = newList
             return this.getTaskById(id)
-        } else {
-            throw new NotFoundException(`Task with ID ${id} not found`);
         }
         
     }
@@ -70,8 +68,6 @@ export class TasksService {
         if (this.getTaskById(id) != undefined) {
             this.tasks = this.tasks.filter((task) => task.id !== id)
             return this.getTaskById(id)
-        } else {
-            throw new NotFoundException(`Task with ID ${id} not found`);
         }
     }
 
