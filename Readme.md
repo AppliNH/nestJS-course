@@ -258,3 +258,28 @@ bootstrap();
 [Doc here](https://github.com/typestack/class-validator#validation-decorators)
 `yarn add class-validator class-transformer`
 
+## Object Relational Mapping (ORM)
+
+ORM is a technique that allows to query and manipulate data from a database, using OOP.
+
+**Pros**
+- Easier to maintain
+- Lot of things are done automatically
+- No need to write SQL
+
+**Cons**
+- Have to learn it
+- Performance is ok, but too easy to neglect
+- Make it easy to forget what's happening behind the scenes.
+
+## TypeORM
+
+It's an ORM lib that can run in NodeJS and be used with TypeScript (or JS).
+
+**Example:**
+
+*Retrieving all tasks owned by Ashley and are of status Done.*
+
+```TYPESCRIPT
+const tasks = await Task.find({ status: 'DONE', user: 'Ashley' });
+```
