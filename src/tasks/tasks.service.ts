@@ -11,7 +11,9 @@ import { Task } from './task.entity';
 export class TasksService {
     constructor(@InjectRepository(TaskRepository) private taskRepository: TaskRepository) {}
 
+    getTasks(filterDTO: GetTaskFilterDto) {
 
+    }
 
     async getTaskById(id: number): Promise<Task> {
         const found = await this.taskRepository.findOne(id);
@@ -24,6 +26,13 @@ export class TasksService {
 
     async createTask(createTaskDTO: CreateTaskDTO): Promise<Task> {
        return this.taskRepository.createTask(createTaskDTO);
+    }
+
+    async updateTaskStatus(id: number, status: TaskStatus): Promise<Task> {
+        const task  = await this.taskRepository.findOne(id);
+        task.status = status;
+        await task.save();
+        return task;
     }
 
     async deleteTaskById(id: number): Promise<Task> {

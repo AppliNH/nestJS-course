@@ -11,6 +11,10 @@ import { Task } from './task.entity';
 export class TasksController {
     constructor(private tasksService: TasksService) {}
 
+    @Get()
+    getTasks(@Query(ValidationPipe) filterDTO: GetTaskFilterDto) {
+        return this.tasksService.getTasks(filterDTO);
+    }
 
     @Get('/:id')
     getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {
@@ -20,6 +24,11 @@ export class TasksController {
     @Post()
     createTask(@Body() createTaskDTO: CreateTaskDTO): Promise<Task> {
         return this.tasksService.createTask(createTaskDTO);
+    }
+
+    @Patch('/:id')
+    updateTaskStatus(@Param('id', ParseIntPipe) id: number, @Body("status", TaskStatusValidationPipe) status: TaskStatus): Promise<Task> {
+        return this.tasksService.updateTaskStatus(id, status);
     }
 
     @Delete('/:id')
