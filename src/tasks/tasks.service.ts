@@ -11,8 +11,8 @@ import { Task } from './task.entity';
 export class TasksService {
     constructor(@InjectRepository(TaskRepository) private taskRepository: TaskRepository) {}
 
-    getTasks(filterDTO: GetTaskFilterDto) {
-
+    getTasks(filterDTO: GetTaskFilterDto): Promise<Task[]> {
+        return this.taskRepository.getTasks(filterDTO);
     }
 
     async getTaskById(id: number): Promise<Task> {
