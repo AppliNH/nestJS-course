@@ -1,5 +1,9 @@
 # NestJS
 
+## Run this one
+
+`docker-compose up -d` and `yarn start`
+
 Built with full support of TS.
 
 It provides an out-of-the-box and ready to use architecture.
