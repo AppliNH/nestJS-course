@@ -1,6 +1,7 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
 
 @Entity()
+@Unique(["username"]) // Means that the username must be unique in db. Else, .save(), will throw an error.
 export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
