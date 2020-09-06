@@ -1,11 +1,12 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { TaskStatus } from "./task-status.enum";
+import { User } from "src/auth/user.entity";
 
 // Task entity in the db
 
 @Entity()
 export class Task extends BaseEntity {
-    
+
     @PrimaryGeneratedColumn() // Tells that ID should be automatically generated and incremented when creating a task
     id: number;
 
@@ -17,4 +18,7 @@ export class Task extends BaseEntity {
 
     @Column()
     status: TaskStatus;
+
+    @ManyToOne(type => User, user => user.tasks, { eager: false }) // There could be many tasks for one user.
+    user: User;         // Only one side of the relationship can have eager=true, not both sides.
 }
