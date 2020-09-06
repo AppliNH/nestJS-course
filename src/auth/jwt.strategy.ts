@@ -17,6 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy){
         });
     }
 
+    // The validate method MUST exist when defining a strategy.
     async validate(payload: JwtPayload): Promise<User> {
         const {username} = payload;
         const user = await this.userRepository.findOne({ username });
