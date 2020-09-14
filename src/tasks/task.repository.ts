@@ -3,6 +3,7 @@ import { Task } from "./task.entity";
 import { CreateTaskDTO } from "./dto/create-task.dto";
 import { TaskStatus } from "./task-status.enum";
 import { GetTaskFilterDto } from "./dto/get-tasks-filter.dto";
+import { User } from "src/auth/user.entity";
 
 // A repository is the layer between your app and the table
 
@@ -27,7 +28,7 @@ export class TaskRepository extends Repository<Task> {
         return tasks;
     }
 
-    async createTask(createTaskDTO: CreateTaskDTO): Promise<Task> {
+    async createTask(createTaskDTO: CreateTaskDTO, user: User): Promise<Task> {
 
         // Creating a method here is better, because this layer is closer to the db than
         // the service is.
@@ -39,8 +40,10 @@ export class TaskRepository extends Repository<Task> {
         task.title = title;
         task.description = description;
         task.status = TaskStatus.OPEN;
+        task.user = user;
 
-        await task.save()
+        await task.save();
+        delete task.user; // Deletes the "user" property so it doesn't get returned in the response
 
         return task;
 
