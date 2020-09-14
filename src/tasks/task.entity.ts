@@ -21,4 +21,8 @@ export class Task extends BaseEntity {
 
     @ManyToOne(type => User, user => user.tasks, { eager: false }) // There could be many tasks for one user.
     user: User;         // Only one side of the relationship can have eager=true, not both sides.
+
+    @Column()
+    userId: number; // Needs to be here as it figures in the db schema for tasks
+    // The userId column in Postgres had been created for us, because we previously set up a relationship
 }

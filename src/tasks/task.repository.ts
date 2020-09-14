@@ -10,9 +10,11 @@ import { User } from "src/auth/user.entity";
 @EntityRepository(Task)
 export class TaskRepository extends Repository<Task> {
 
-    async getTasks(filterDTO: GetTaskFilterDto): Promise<Task[]> {
+    async getTasks(filterDTO: GetTaskFilterDto, user: User): Promise<Task[]> {
         const { status, search } = filterDTO;
         const query = this.createQueryBuilder('task');
+
+        query.where("task.userId = :userId", {userId: user.id});
 
         if (status) {
             query.andWhere("task.status = :status", { status }) // When you simple use "where", you override any other "where".
