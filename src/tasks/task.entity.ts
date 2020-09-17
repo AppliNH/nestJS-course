@@ -1,6 +1,7 @@
+import { User } from "../auth/user.entity";
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { TaskStatus } from "./task-status.enum";
-import { User } from "src/auth/user.entity";
+
 
 // Task entity in the db
 
