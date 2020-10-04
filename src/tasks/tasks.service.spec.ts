@@ -1,16 +1,21 @@
+import { NotFoundException } from '@nestjs/common';
 // Testing for tasks.service.ts
 
 import { Test } from '@nestjs/testing';
+import { userInfo } from 'os';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
 import { TaskStatus } from './task-status.enum';
 import { TaskRepository } from './task.repository';
 import { TasksService } from './tasks.service';
 
 
-const mockUser = { username: "TestUser" };
+const mockUser = {id: 12, username: "TestUser" };
 
 const mockTaskRepository = () => ({
     getTasks: jest.fn(),
+    findOne: jest.fn(),
+    createTask: jest.fn(),
+    remove: jest.fn()
 });
 
 
@@ -50,5 +55,61 @@ describe("Tasks_Services", () => {
         });
 
     })
+
+
+    describe("getTaskById", () => {
+
+
+        it("calls taskRepo.findOne and successfully retrieves and returns the task", async () => {
+            const mockTask = {title: "title", description: "desc"};
+            taskRepository.findOne.mockResolvedValue(mockTask);
+
+            const result = await tasksService.getTaskById(1, mockUser)
+
+            expect(result).toEqual(mockTask);
+            expect(taskRepository.findOne).toHaveBeenCalledWith({
+                where: {
+                    id:1, 
+                    userId: mockUser.id,
+                }
+            });
+
+
+        });
+
+        it("throws an error as task not found", () => {
+
+            taskRepository.findOne.mockResolvedValue(null);
+
+            expect(tasksService.getTaskById(1, mockUser)).rejects.toThrow(NotFoundException); // expect the catch an exception.
+
+        });
+
+
+    })
+
+
+    describe("createTask", () => {
+
+
+        it("try to create a task", async () => {    
+            taskRepository.createTask.mockResolvedValue("someTask")
+            expect(taskRepository.createTask).not.toHaveBeenCalled();
+
+
+            const mockTask = {title: "title", description: "desc"}
+            const result = await tasksService.createTask(mockTask, mockUser);
+
+            expect(taskRepository.createTask).toHaveBeenCalledWith(mockTask, mockUser);
+
+            expect(result).toEqual("someTask");
+
+        });
+
+
+    });
+
+
+
 
 });
