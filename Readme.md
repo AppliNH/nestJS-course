@@ -1,8 +1,14 @@
-# NestJS
+# NestJS Course
 
 Built with full support of TS.
 
 It provides an out-of-the-box and ready to use architecture.
+## Branches
+
+[connect with db](https://github.com/AppliNH/nestJS-course/tree/connect_with_db)
+[user auth](https://github.com/AppliNH/nestJS-course/tree/user_auth)
+[jest testing](https://github.com/AppliNH/nestJS-course/tree/jest_testing)
+[graphql example](https://github.com/AppliNH/nestJS-course/tree/graphql_example)
 
 ## CLI commands
 
