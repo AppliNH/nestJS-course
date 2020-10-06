@@ -1,4 +1,11 @@
 # NestJS & GraphQL example
+## Run this one 
+
+`docker-compose up -d && yarn start`
+
+--- 
+
+
 
 Types are decorated with `ObjectType` and each fields are decoreated with `Field`.
 
