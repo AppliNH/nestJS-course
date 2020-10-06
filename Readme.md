@@ -14,7 +14,7 @@ It provides an out-of-the-box and ready to use architecture.
 [jest testing](https://github.com/AppliNH/nestJS-course/tree/jest_testing)
 
 
-[graphql example](https://github.com/AppliNH/nestJS-course/tree/graphql_example)
+[graphql example](https://github.com/AppliNH/nestJS-course/tree/graphql-example)
 
 ## CLI commands
 
