@@ -1,5 +1,5 @@
 {
-  "name": "nestjs-task-mgmt",
+  "name": "nestjs-graphql",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -14,7 +14,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "NODE_ENV=development && jest",
+    "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
@@ -23,20 +23,21 @@
   "dependencies": {
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
-    "@nestjs/jwt": "^7.1.0",
-    "@nestjs/passport": "^7.1.0",
+    "@nestjs/graphql": "^7.7.0",
     "@nestjs/platform-express": "^7.0.0",
-    "@nestjs/typeorm": "^7.1.1",
-    "bcrypt": "^5.0.0",
+    "@nestjs/typeorm": "^7.1.4",
+    "@types/mongodb": "^3.5.27",
+    "apollo-server-express": "^2.18.1",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "pg": "^8.3.2",
+    "graphql": "14.6.0",
+    "graphql-tools": "^6.2.4",
+    "mongodb": "^3.6.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",
-    "typeorm": "^0.2.25"
+    "typeorm": "^0.2.28",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",
@@ -66,14 +67,10 @@
       "json",
       "ts"
     ],
-    "moduleDirectories": ["node_modules", "src"],
     "rootDir": "src",
     "testRegex": ".spec.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "moduleNameMapper": {
-      "@app/(.*)": "<rootDir>/src/$1"
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"

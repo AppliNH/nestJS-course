@@ -1,12 +1,36 @@
 import { Module } from '@nestjs/common';
-import { TasksModule } from './tasks/tasks.module';
+import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { typeORMConfig } from './config/typeorm.config';
-import { AuthModule } from './auth/auth.module';
+import { LessonModule } from './lesson/lesson.module';
+import { LessonResolver } from './lesson/lesson.resolver';
+import {Lesson} from './lesson/lesson.entity';
+import { StudentModule } from './student/student.module';
+import {Student} from './student/student.entity';
+import {StudentResolver} from './student/student.resolver';
 
 
 @Module({
-  imports: [TasksModule, TypeOrmModule.forRoot(typeORMConfig), AuthModule],
+  imports: [
+    LessonModule,
 
+    TypeOrmModule.forRoot({
+      type: 'mongodb',
+      url:'mongodb://localhost/school', // School database
+      synchronize: true,
+      useUnifiedTopology: true,
+      entities: [
+        Lesson,
+        Student
+      ]
+    }),
+
+    GraphQLModule.forRoot({
+      autoSchemaFile: true
+    }),
+
+    StudentModule,
+    
+  ],
+  providers:[LessonResolver, StudentResolver]
 })
 export class AppModule {}
