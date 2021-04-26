@@ -3,6 +3,10 @@
 Built with full support of TS.
 
 It provides an out-of-the-box and ready to use architecture.
+## Start this up 
+- `yarn install`
+- `docker-compose up -d` 
+- `yarn start:dev`
 ## Branches
 
 [connect with db](https://github.com/AppliNH/nestJS-course/tree/connect_with_db)

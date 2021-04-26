@@ -10,6 +10,7 @@ services:
     environment: 
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
+      POSTGRES_DB: taskmgmt
     volumes: 
       - postgredata:/pgdata
     networks:
@@ -21,7 +22,7 @@ services:
       - 8080:80
       - 443:443
     environment: 
-      PGADMIN_DEFAULT_EMAIL: admin
+      PGADMIN_DEFAULT_EMAIL: admin@linux.com
       PGADMIN_DEFAULT_PASSWORD: admin
     networks:
       - postgrenetwork
